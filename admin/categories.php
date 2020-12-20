@@ -26,7 +26,10 @@
                             if(empty($cat_title))
                             echo "Ce Champ Doit Etre Rempli";
                             else {
-                                
+                                $qry = "INSERT INTO categories(cat_title) VALUES ('{$cat_title}')";
+                                $result = mysqli_query($connection, $qry);
+                                if(!$result)
+                                die("QUERY FAILED".mysqli_error($connection));
                             }
                         }
                         
@@ -39,6 +42,9 @@
                         <div class="form-group">
                         <input type="submit" class="btn btn-primary" name="submit" value="Add Categorie"></div>
                         </form>
+
+                        <?php include './includes/update_categories.php'; ?>
+
                         </div>
                         <div class="col-xs-6">
                         
@@ -47,6 +53,8 @@
                            <tr>
                            <th>ID</th>
                            <th>Title</th>
+                           <th>ACTION</th>
+                           <th>ACTION</th>
                            </tr>
                            </thead>
                            <tbody>
@@ -61,6 +69,8 @@
                                echo "<tr>";
                                echo "<td>$cat_id</td>";
                                echo "<td>$cat_title</td>";
+                               echo "<td><a href='categories.php?update={$cat_id}'>EDIT</a></td>";
+                               echo "<td><a href='categories.php?delete={$cat_id}'>DELETE</a></td>";
                                echo "</tr>";
                            }
                                ?>
@@ -68,6 +78,15 @@
                                
                            </tbody>
                            </table>
+                           <?php
+                           //DELETE FROM category
+                           if(isset($_GET['delete'])){
+                             $delete_id = $_GET['delete'];
+                             $qry = "DELETE FROM categories where cat_id = $delete_id";
+                             $result = mysqli_query($connection, $qry);
+                             header("Location: categories.php");
+                           }
+                           ?>
                         </div>
                        
                     </div>
