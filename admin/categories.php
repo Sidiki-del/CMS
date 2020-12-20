@@ -21,17 +21,7 @@
                         </h1>
                         <div class="col-xs-6">
                             <?php
-                        if(isset($_POST['submit'])){
-                            $cat_title = $_POST['cat_title'];
-                            if(empty($cat_title))
-                            echo "Ce Champ Doit Etre Rempli";
-                            else {
-                                $qry = "INSERT INTO categories(cat_title) VALUES ('{$cat_title}')";
-                                $result = mysqli_query($connection, $qry);
-                                if(!$result)
-                                die("QUERY FAILED".mysqli_error($connection));
-                            }
-                        }
+                        insert_category();
                         
                         ?>
                         <form action="" method="post">
@@ -79,13 +69,7 @@
                            </tbody>
                            </table>
                            <?php
-                           //DELETE FROM category
-                           if(isset($_GET['delete'])){
-                             $delete_id = $_GET['delete'];
-                             $qry = "DELETE FROM categories where cat_id = $delete_id";
-                             $result = mysqli_query($connection, $qry);
-                             header("Location: categories.php");
-                           }
+                           delete_category();
                            ?>
                         </div>
                        

@@ -20,10 +20,5 @@
          </form>
 
          <?php
-         if(isset($_POST['update_category'])){
-             $cat_id = $_GET['update'];
-             $cat_title = $_POST['cat_title'];
-             $qry = "UPDATE categories set cat_title = '$cat_title' WHERE cat_id = '$cat_id'";
-             $result = mysqli_query($connection, $qry);
-             
-         }
+         update_category();
+         ?>
